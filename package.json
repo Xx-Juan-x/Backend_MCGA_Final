@@ -1,0 +1,28 @@
+{
+  "name": "final_backend_mcga",
+  "version": "1.0.0",
+  "description": "Desarrollo de aplicación backend como trabajo final",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Xx-Juan-x/Backend_MCGA_Final.git"
+  },
+  "author": "adrian y juan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Xx-Juan-x/Backend_MCGA_Final/issues"
+  },
+  "homepage": "https://github.com/Xx-Juan-x/Backend_MCGA_Final#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.8.0"
+  }
+}
