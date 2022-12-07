@@ -26,7 +26,7 @@ searchProduct = (req, res) =>{
 addProduct = (req, res) => {
     const newProducts = new products(req.body);
     newProducts.save()
-    .then(data => res.status(201).json({mensaje: `El producto ${data.name} ha sido añadido, data`}))
+    .then(data => res.status(201).json({mensaje: `El producto ${data.name} ha sido añadido`, data}))
     .catch(() => res.status(500).json({mensaje: "Error"}));
 }
 

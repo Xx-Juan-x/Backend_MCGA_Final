@@ -1,5 +1,5 @@
 const router = require('express').Router();
-require('../controllers/products');
+require('../controllers/Products');
 
 router.get('/', (req, res) => listProducts(req, res));
 
