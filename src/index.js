@@ -22,11 +22,11 @@ app.get('/',(req, res)=>{
     res.send(200, "OK");
 })
 
+
+app.listen(process.env.PORT, () => console.log("🟢 Server OK"))
+
 mongoose.connect(process.env.DB_CONNECT)
-.then(
-    app.listen(()=>{
-        console.log('DB OK');
-        app.listen(process.env.PORT, () => console.log('Server OK'))
+    .then(() => {
+        console.log("🟢 DB Connected")
     })
-)
-.catch((error)=> console.log("DB Failed" + error))
+    .catch(err => console.log("🔴 Server error: " + err.message));
