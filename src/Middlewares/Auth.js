@@ -1,10 +1,22 @@
-export const AuthMiddleware = (req, res, next) => {
-    try {
-      const token = req.headers.authorization;
-      if (token !== '1234') throw new Error('Invalid token');
-      console.log('token', token);
-      next();
+const User = require('../models/Users');
+const jwt = require('jsonwebtoken');
+
+const checkAuth = async (req, res, next) => {
+    try{
+        const { token } = req.headers;
+        const decoded = await jwt.verify(token, process.env.JWT_KEY);
+        const user = await User.findById(decoded.userId);
+        if(token !== user.token){
+            throw new Error('Invalid token');
+        }
+        next();
     } catch (error) {
-      res.status(401).send({ msg: error });
+        res.status(401).json({
+            Message: 'Unauthorized',
+            Success: false,
+            data: error.toString(),
+        })
     }
-  };
+}
+
+module.exports = checkAuth

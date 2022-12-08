@@ -1,16 +1,29 @@
 const router = require('express').Router();
-require('../controllers/Users');
 
-router.get('/', (req, res) => getUsers(req, res));
+const {
+        loginUser,
+        getUsers,
+        validateUser,
+        createUser,
+        updateUser,
+        activateUser,
+        deleteUser
+    } = require('../controllers/Users')
 
-router.post('/', (req, res) => validateUser(req, res));
+const authMiddleware = require('../Middlewares/Auth');
 
-router.post('/add', (req, res) => createUser(req, res));
+router.post('/login', loginUser);
 
-router.put('/update/:id', (req, res) => updateUser(req, res));
+router.get('/', getUsers);
 
-router.put('/activate/:id', (req, res) => activateUser(req, res));
+router.post('/', authMiddleware, validateUser);
 
-router.delete('/delete/:id', (req, res) => deleteUser(req, res));
+router.post('/add', authMiddleware, createUser);
+
+router.put('/update/:id', authMiddleware, updateUser);
+
+router.put('/activate/:id', authMiddleware, activateUser);
+
+router.delete('/delete/:id', authMiddleware, deleteUser);
 
 module.exports = router;

@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const router = require('./routes');
+const router = require('./src/routes');
 
 const app = express();
 
@@ -26,7 +26,5 @@ app.get('/',(req, res)=>{
 app.listen(process.env.PORT, () => console.log("🟢 Server OK"))
 
 mongoose.connect(process.env.DB_CONNECT)
-    .then(() => {
-        console.log("🟢 DB Connected")
-    })
+    .then(() => console.log("🟢 DB Connected"))
     .catch(err => console.log("🔴 Server error: " + err.message));

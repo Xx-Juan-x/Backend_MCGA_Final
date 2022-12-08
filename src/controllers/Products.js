@@ -3,14 +3,14 @@ const products = require('../models/products');
 //Endpoints
 
 //GET: para conseguir la lista entera de productos
-listProducts = (req, res) =>{
+const listProducts = (req, res) =>{
     products.find()
     .then(data => res.status(200).json(data))
     .catch(error => res.status(500).json({mensaje: error}));
 }
 
 //GET: para conseguir un producto por name
-searchProduct = (req, res) =>{
+const searchProduct = (req, res) =>{
     const name = req.params.name
     products.findOne({name: name})
     .then(data => {
@@ -23,7 +23,7 @@ searchProduct = (req, res) =>{
 }
 
 //POST: para agregar un producto a la BD
-addProduct = (req, res) => {
+const addProduct = (req, res) => {
     const newProducts = new products(req.body);
     newProducts.save()
     .then(data => res.status(201).json({mensaje: `El producto ${data.name} ha sido añadido`, data}))
@@ -31,7 +31,7 @@ addProduct = (req, res) => {
 }
 
 //DELETE: para eliminar un producto
-deleteProduct = (req, res) => {
+const deleteProduct = (req, res) => {
     const id = req.params.id;
     products.findByIdAndDelete(id)
     .then(data => {
@@ -44,7 +44,7 @@ deleteProduct = (req, res) => {
 }
 
 //PUT: para editar algún campo de un producto
-updateProduct = (req, res) => {
+const updateProduct = (req, res) => {
     const id = req.params.id;
     products.findByIdAndUpdate(id, req.body)
     .then(data => {

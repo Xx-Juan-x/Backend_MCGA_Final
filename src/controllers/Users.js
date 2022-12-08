@@ -1,6 +1,53 @@
 const User = require('../models/Users');
+const jwt = require('jsonwebtoken');
 
-getUsers = async (req, res) => {
+const loginUser = async (req, res) => {
+  try{
+      console.log(req.body);
+      let email = req.body.email;
+      let user = await User.findOne({
+          email: email,
+          password: req.body.pass
+      });
+      if(!user)
+          return res.status(401).json({
+              Success: false,
+              Message: "Invalid user"
+          })
+
+      const token = jwt.sign({
+          email: email,
+          userId: user._id
+      },
+      process.env.JWT_KEY,
+      {
+          expiresIn: '1d'
+      });
+      const updatedUser = await User.findOneAndUpdate(
+          { email: email },
+          { token },
+          { new: true }
+      );
+      res.status(200).json({
+          Message: 'User logged',
+          Success: true,
+          data: {
+              email: updatedUser.email,
+              token: updatedUser.token,
+              id: updatedUser._id
+          }
+      })
+  }
+  catch (err){
+      console.log(err);
+      res.status(500).json({
+          Success: false,
+          Message: err
+      })
+  }
+}
+
+const getUsers = async (req, res) => {
   try {
     const users = await User.find();
     res.json(users);
@@ -9,7 +56,7 @@ getUsers = async (req, res) => {
   }
 };
 
-validateUser = async (req, res) => {
+const validateUser = async (req, res) => {
   try {
     const user = await User.findOne({ name: req.body.name });
     if (user && !user.isDeleted) {
@@ -26,7 +73,7 @@ validateUser = async (req, res) => {
   }
 };
 
-createUser = async (req, res) => {
+const createUser = async (req, res) => {
   const user = new User(req.body);
   try {
     const newUser = await user.save();
@@ -36,7 +83,7 @@ createUser = async (req, res) => {
   }
 };
 
-updateUser = async (req, res) => {
+const updateUser = async (req, res) => {
     try {
         User.updateOne({ _id: req.params.id }, req.body, (err, result) => {
             if (err) {
@@ -52,7 +99,7 @@ updateUser = async (req, res) => {
     }
 };
 
-deleteUser = async (req, res) => {
+const deleteUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     if (user) {
@@ -67,7 +114,7 @@ deleteUser = async (req, res) => {
   }
 };
 
-activateUser = async (req, res) => {
+const activateUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     if (user) {
@@ -82,4 +129,4 @@ activateUser = async (req, res) => {
   }
 };
 
-module.exports = { getUsers, validateUser, createUser, updateUser, deleteUser, activateUser };
+module.exports = { loginUser, getUsers, validateUser, createUser, updateUser, deleteUser, activateUser };
