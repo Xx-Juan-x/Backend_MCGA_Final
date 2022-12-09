@@ -7,7 +7,7 @@ const {
         updateProduct
     } = require('../controllers/Products');
 
-const authMiddleware = require('../Middlewares/Auth');
+const authMiddleware = require('../middlewares/Auth');
 
 router.get('/', listProducts);
 
