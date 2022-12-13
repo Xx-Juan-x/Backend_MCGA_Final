@@ -31,3 +31,5 @@ app.listen(process.env.PORT, () => console.log("🟢 Server OK"))
 mongoose.connect(process.env.DB_CONNECT)
     .then(() => console.log("🟢 DB Connected"))
     .catch(err => console.log("🔴 Server error: " + err.message));
+
+module.exports = app;
