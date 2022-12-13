@@ -21,6 +21,15 @@ const ProductsSchema = new Schema({
         type: String,
         maxlenght: 100,
     },
+    category:{
+        type: String,
+        required: true,
+        enum: ['computers', 'phones', 'accesories'],
+    },
+    isDeleted: {
+        type: Boolean,
+        default: false,
+      },
 })
 
 module.exports = mongoose.model("Products", ProductsSchema);

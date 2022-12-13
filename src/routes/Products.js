@@ -13,10 +13,10 @@ router.get('/', listProducts);
 
 router.get('/:name', searchProduct);
 
-router.post("/add", authMiddleware, addProduct);
+router.post("/add", addProduct);
 
 router.delete("/delete/:id", authMiddleware, deleteProduct);
 
-router.put("/update/:id", authMiddleware, updateProduct);
+router.put("/update/:id", updateProduct);
 
 module.exports = router;
