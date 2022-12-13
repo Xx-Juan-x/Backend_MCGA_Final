@@ -15,7 +15,7 @@ router.get('/:name', searchProduct);
 
 router.post("/add", addProduct);
 
-router.delete("/delete/:id", authMiddleware, deleteProduct);
+router.delete("/delete/:id", deleteProduct);
 
 router.put("/update/:id", updateProduct);
 
