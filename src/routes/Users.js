@@ -10,7 +10,7 @@ const {
         deleteUser
     } = require('../controllers/Users')
 
-const authMiddleware = require('../middlewares/Auth');
+const authMiddleware = require('../Middlewares/Auth.js');
 
 router.post('/login', loginUser);
 
