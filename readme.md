@@ -1,7 +1,16 @@
 # Final MCGA Backend
 
-### Repositorio HitHub
->https://github.com/Xx-Juan-x/Backend_MCGA_Final
+### URL backend
+https://backend-mcga-final.vercel.app/
+
+### URL fronend
+https://frontend-mcga-final.vercel.app/
+
+### Repositorio backend
+https://github.com/Xx-Juan-x/Backend_MCGA_Final
+
+### Repositorio Fronent
+https://github.com/Adrincovich/frontend_mcga_final
 
 ### Usuarios.
 Crear 6 endpoints respetando los métodos HTTP:<br>
