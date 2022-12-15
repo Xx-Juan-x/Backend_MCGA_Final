@@ -1,4 +1,4 @@
-const products = require('../models/products');
+const products = require('../models/Products.js');
 
 //Endpoints
 

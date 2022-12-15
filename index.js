@@ -17,7 +17,7 @@ app.use(function(req, res, next) {
 });
 
 app.use(express.json());
-app.use('/api', router);
+app.use(router);
 app.use(cors());
 
 //GET: para hacer ping al servidor y que devuelva 'OK' en caso que el server y la BD estén levantadas
